@@ -5,6 +5,7 @@ import fs from 'fs'
 
 const app = express()
 const port = 3000
+const host = '0.0.0.0'
 
 app.set('view engine', 'ejs')
 app.set('views', './templates')
@@ -39,6 +40,6 @@ app.get('/skip', (req, res) => {
     renderForm(res, counter)
 })
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
+app.listen(port, host, () => {
+    console.log(`Listening on port ${port} and host ${host}`)
 })
