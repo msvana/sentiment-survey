@@ -12,8 +12,8 @@ app.set('views', './templates')
 
 app.use(bodyParser.urlencoded({extended: false}))
 
-const outputFile = '/data/result.csv'
-const tweets = parse(fs.readFileSync('tweets_ostrava.csv', 'utf8'))
+const outputFile = './data/result.csv'
+const tweets = parse(fs.readFileSync('./data/tweets.csv', 'utf8'))
     .filter((item) => item[1].length >= 50 && !item[1].includes('#holytrainer'))
 
 
