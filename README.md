@@ -27,7 +27,7 @@ $ npm install
 $ node app.js
 ```
 
-The app now runs at http://localhost:3000
+The app now runs at `http://localhost:3000`
 
 ### Option 2: Docker
 
@@ -35,3 +35,5 @@ The app now runs at http://localhost:3000
 $ docker build -t sentiment-survey .
 $ docker run -p {HOST_PORT}:3000 -v {DATA_DIR}:/app/data sentiment-survey
 ```
+
+The app now runs at `http://locahost:{HOST_PORT}`
