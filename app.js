@@ -2,6 +2,7 @@ import bodyParser from 'body-parser'
 import {parse} from 'csv-parse/sync'
 import express from 'express'
 import fs from 'fs'
+import md5 from 'md5'
 
 const app = express()
 const port = 3000
@@ -20,12 +21,12 @@ const tweets = parse(fs.readFileSync('./data/tweets.csv', 'utf8'))
 function renderForm(res, counter) {
     const done = counter > 15
     const randomTweet = tweets[Math.floor(Math.random() * tweets.length)]
-    const tweet = {text: randomTweet[1], id: randomTweet[0]}
+    const tweet = {text: randomTweet[1], hash: md5(randomTweet[1])}
     res.render('survey', {tweet: tweet, counter: counter, done: done})
 }
 
 app.post('/', (req, res) => {
-    const record = [req.body.id, req.body.positive, req.body.negative]
+    const record = [req.body.hash, req.body.positive, req.body.negative]
     const counter = parseInt(req.body.counter)
     fs.appendFileSync(outputFile, record.join(',') + '\n')
     renderForm(res, counter + 1)
