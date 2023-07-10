@@ -22,11 +22,14 @@ function renderForm(res, counter) {
     const done = counter > 15
     const randomTweet = tweets[Math.floor(Math.random() * tweets.length)]
     const tweet = {text: randomTweet[1], hash: md5(randomTweet[1])}
-    res.render('survey', {tweet: tweet, counter: counter, done: done})
+    const startTime = Date.now()
+    res.render('survey', {tweet: tweet, counter: counter, done: done, startTime: startTime})
 }
 
 app.post('/', (req, res) => {
-    const record = [req.body.hash, req.body.positive, req.body.negative]
+    const startTime = parseInt(req.body.starttime)
+    const endTime = Date.now()
+    const record = [req.body.hash, req.body.positive, req.body.negative, startTime, endTime]
     const counter = parseInt(req.body.counter)
     fs.appendFileSync(outputFile, record.join(',') + '\n')
     renderForm(res, counter + 1)
