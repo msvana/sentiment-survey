@@ -29,8 +29,8 @@ function renderForm(res, counter) {
 app.post('/', (req, res) => {
     const startTime = parseInt(req.body.starttime)
     const endTime = Date.now()
-    const record = [req.body.hash, req.body.positive, req.body.negative, startTime, endTime]
     const counter = parseInt(req.body.counter)
+    const record = [req.body.hash, req.body.positive, req.body.negative, counter, startTime, endTime]
     fs.appendFileSync(outputFile, record.join(',') + '\n')
     renderForm(res, counter + 1)
 })
